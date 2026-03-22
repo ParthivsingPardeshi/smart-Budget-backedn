@@ -1,0 +1,12 @@
+bin/
+obj/
+obj2/
+publish/
+*.user
+*.suo
+*.tmp
+*.log
+run.out.log
+run.err.log
+_write_test.tmp
+
