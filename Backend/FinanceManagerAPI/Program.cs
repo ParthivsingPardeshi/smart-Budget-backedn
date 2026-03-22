@@ -20,7 +20,6 @@ builder.Logging.AddConsole();
 
 AppContext.SetSwitch("System.Net.DisableIPv6", true);
 
-var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(
