@@ -18,6 +18,11 @@ builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+    ));
+    
 builder.Services
     .AddControllers()
     .AddJsonOptions(options =>
