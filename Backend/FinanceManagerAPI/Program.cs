@@ -20,13 +20,14 @@ builder.Logging.AddConsole();
 
 AppContext.SetSwitch("System.Net.DisableIPv6", true);
 
+var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(
         builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 
 
-    
 builder.Services
     .AddControllers()
     .AddJsonOptions(options =>
@@ -116,6 +117,12 @@ catch (Exception ex)
 {
     Console.WriteLine("⚠️ DB migration failed: " + ex.Message);
 }
+// add new 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
 
 // ✅ MIDDLEWARE
 app.UseSwagger();
@@ -132,5 +139,8 @@ app.UseAuthorization();
 app.MapGet("/", () => "Backend Running 🚀");
 
 app.MapControllers();
+
+
+
 
 app.Run();
