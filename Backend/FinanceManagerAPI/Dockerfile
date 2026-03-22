@@ -4,8 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-WORKDIR /app/Backend/FinanceManagerAPI
-
-RUN dotnet publish -c Release -o out
+# 🔍 Find and publish using explicit path
+RUN dotnet publish Backend/FinanceManagerAPI/FinanceManagerAPI.csproj -c Release -o out
 
 CMD ["dotnet", "out/FinanceManagerAPI.dll", "--urls", "http://0.0.0.0:8080"]
