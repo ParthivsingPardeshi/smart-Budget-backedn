@@ -18,10 +18,14 @@ builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
+AppContext.SetSwitch("System.Net.DisableIPv6", true);
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(
         builder.Configuration.GetConnectionString("DefaultConnection")
     ));
+
+
     
 builder.Services
     .AddControllers()
