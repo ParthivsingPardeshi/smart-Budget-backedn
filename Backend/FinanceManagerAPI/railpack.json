@@ -1,6 +1,0 @@
-{
-  "build": {
-    "builder": "dotnet"
-  },
-  "start": "cd Backend && dotnet run"
-}
